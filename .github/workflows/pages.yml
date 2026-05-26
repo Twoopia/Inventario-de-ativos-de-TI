@@ -27,6 +27,11 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      - name: Fix asset paths for GitHub Pages
+        run: |
+          sed -i 's|href="/frontend/style.css"|href="./style.css"|g' frontend/index.html
+          sed -i 's|src="/frontend/app.js"|src="./app.js"|g' frontend/index.html
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
