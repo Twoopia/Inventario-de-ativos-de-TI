@@ -26,7 +26,7 @@ INSERT INTO users (name, email, hashed_password, department, is_admin, is_active
   (
     'Administrador TI',
     'admin@empresa.com',
-    '$2b$12$LQv3c1yqBWVHxkd0LHAkCOYz6TtxMQJqhN8/LewdBPj4tbQR.Nq5a',
+    '$2b$12$KdEIJS6a6.BR2xj7hZhcZO/mr3vzic2wVXNGTOR3rRemj.RIDBpn2',
     'TI',
     true,
     true

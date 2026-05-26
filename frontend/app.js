@@ -1,3 +1,83 @@
+/* ─── Demo Mode (GitHub Pages) ───────────────────────────────── */
+const DEMO_MODE = window.location.hostname.includes('github.io') || window.location.hostname === '';
+
+const DEMO_DATA = {
+  user: { id:1, name:'Administrador TI', email:'admin@empresa.com', department:'TI', is_admin:true, is_active:true },
+  dashboard: {
+    total_assets:48, active_assets:32, maintenance_assets:5, assets_without_responsible:4,
+    total_value:285000, warranty_expiring_soon:2,
+    assets_by_status:[
+      {status:'ativo',count:32},{status:'inativo',count:6},{status:'manutencao',count:5},
+      {status:'descartado',count:3},{status:'perdido',count:1},{status:'reservado',count:1},
+    ],
+    assets_by_category:[
+      {category:'Notebook',count:18},{category:'Computador Desktop',count:12},
+      {category:'Monitor',count:8},{category:'Switch / Roteador',count:4},
+      {category:'Impressora',count:3},{category:'Servidor',count:2},{category:'Nobreak / UPS',count:1},
+    ],
+    recent_movements:[
+      {asset_tag:'TI-0042',asset_name:'Notebook Dell XPS 15',movement_type:'transferencia',created_at:'26/05/2026 14:32',created_by:'Administrador TI'},
+      {asset_tag:'TI-0038',asset_name:'Monitor LG 27" 4K',movement_type:'entrada_manutencao',created_at:'25/05/2026 09:15',created_by:'Carlos Silva'},
+      {asset_tag:'TI-0021',asset_name:'MacBook Pro M3',movement_type:'aquisicao',created_at:'24/05/2026 16:48',created_by:'Administrador TI'},
+    ],
+  },
+  categories:[
+    {id:1,name:'Notebook',description:'Laptops e ultrabooks',asset_count:18},
+    {id:2,name:'Computador Desktop',description:'Desktops e workstations',asset_count:12},
+    {id:3,name:'Monitor',description:'Monitores e displays',asset_count:8},
+    {id:4,name:'Switch / Roteador',description:'Equipamentos de rede',asset_count:4},
+    {id:5,name:'Impressora',description:'Impressoras e multifuncionais',asset_count:3},
+    {id:6,name:'Servidor',description:'Servidores físicos e virtuais',asset_count:2},
+    {id:7,name:'Nobreak / UPS',description:'Fontes de energia',asset_count:1},
+  ],
+  assets:{
+    total:48, page:1, pages:4,
+    items:[
+      {id:1,name:'Notebook Dell XPS 15',tag:'TI-0042',brand:'Dell',model:'XPS 15 9520',status:'ativo',location:'Sala 201',category:{name:'Notebook'},responsible_user:{name:'Ana Lima'},image_path:null},
+      {id:2,name:'MacBook Pro M3',tag:'TI-0021',brand:'Apple',model:'MacBook Pro 14"',status:'ativo',location:'Sala 305',category:{name:'Notebook'},responsible_user:{name:'Pedro Costa'},image_path:null},
+      {id:3,name:'Monitor LG 27" 4K',tag:'TI-0038',brand:'LG',model:'27UK850-W',status:'manutencao',location:'Almoxarifado',category:{name:'Monitor'},responsible_user:null,image_path:null},
+      {id:4,name:'Desktop HP EliteDesk',tag:'TI-0015',brand:'HP',model:'EliteDesk 800 G9',status:'ativo',location:'Financeiro',category:{name:'Computador Desktop'},responsible_user:{name:'Maria Souza'},image_path:null},
+      {id:5,name:'Switch Cisco 24P',tag:'TI-0007',brand:'Cisco',model:'Catalyst 2960',status:'ativo',location:'Rack Principal',category:{name:'Switch / Roteador'},responsible_user:{name:'Carlos Silva'},image_path:null},
+      {id:6,name:'Notebook Lenovo ThinkPad',tag:'TI-0055',brand:'Lenovo',model:'ThinkPad X1 Carbon',status:'ativo',location:'RH',category:{name:'Notebook'},responsible_user:{name:'Juliana Ferreira'},image_path:null},
+      {id:7,name:'Impressora HP LaserJet',tag:'TI-0033',brand:'HP',model:'LaserJet Pro M404n',status:'inativo',location:'Sala Impressão',category:{name:'Impressora'},responsible_user:null,image_path:null},
+      {id:8,name:'Servidor Dell PowerEdge',tag:'TI-0003',brand:'Dell',model:'PowerEdge R750',status:'ativo',location:'Datacenter',category:{name:'Servidor'},responsible_user:{name:'Carlos Silva'},image_path:null},
+      {id:9,name:'Monitor Samsung 24"',tag:'TI-0061',brand:'Samsung',model:'LF24T400',status:'ativo',location:'Atendimento',category:{name:'Monitor'},responsible_user:{name:'Roberto Alves'},image_path:null},
+      {id:10,name:'Desktop Dell Optiplex',tag:'TI-0019',brand:'Dell',model:'OptiPlex 7090',status:'ativo',location:'Comercial',category:{name:'Computador Desktop'},responsible_user:{name:'Fernanda Lima'},image_path:null},
+      {id:11,name:'Notebook Asus ROG',tag:'TI-0048',brand:'Asus',model:'ROG Zephyrus G14',status:'reservado',location:'TI',category:{name:'Notebook'},responsible_user:null,image_path:null},
+      {id:12,name:'Nobreak APC 1500VA',tag:'TI-0012',brand:'APC',model:'Back-UPS 1500G',status:'ativo',location:'Datacenter',category:{name:'Nobreak / UPS'},responsible_user:{name:'Carlos Silva'},image_path:null},
+    ],
+  },
+  users:[
+    {id:1,name:'Administrador TI',email:'admin@empresa.com',department:'TI',phone:'(11) 98765-4321',is_admin:true,is_active:true,created_at:'2026-01-10T08:00:00'},
+    {id:2,name:'Carlos Silva',email:'carlos@empresa.com',department:'Infraestrutura',phone:'(11) 97654-3210',is_admin:false,is_active:true,created_at:'2026-01-15T08:00:00'},
+    {id:3,name:'Ana Lima',email:'ana@empresa.com',department:'Desenvolvimento',phone:'(11) 96543-2109',is_admin:false,is_active:true,created_at:'2026-02-01T08:00:00'},
+    {id:4,name:'Maria Souza',email:'maria@empresa.com',department:'Financeiro',phone:'(11) 95432-1098',is_admin:false,is_active:true,created_at:'2026-02-10T08:00:00'},
+    {id:5,name:'Pedro Costa',email:'pedro@empresa.com',department:'Comercial',phone:'(11) 94321-0987',is_admin:false,is_active:true,created_at:'2026-02-20T08:00:00'},
+  ],
+  movements:{
+    total:24, page:1, pages:2,
+    items:[
+      {id:1,movement_type:'transferencia',asset_id:1,from_user:{name:'Pedro Costa'},from_location:'Sala 305',to_user:{name:'Ana Lima'},to_location:'Sala 201',created_by:{name:'Administrador TI'},created_at:'2026-05-26T14:32:00',description:'Transferência para novo projeto'},
+      {id:2,movement_type:'entrada_manutencao',asset_id:3,from_user:null,from_location:'Sala 401',to_user:null,to_location:'Almoxarifado',created_by:{name:'Carlos Silva'},created_at:'2026-05-25T09:15:00',description:'Tela com defeito'},
+      {id:3,movement_type:'aquisicao',asset_id:2,from_user:null,from_location:null,to_user:{name:'Pedro Costa'},to_location:'Sala 305',created_by:{name:'Administrador TI'},created_at:'2026-05-24T16:48:00',description:'Aquisição novo equipamento'},
+      {id:4,movement_type:'atribuicao',asset_id:4,from_user:null,from_location:'Almoxarifado',to_user:{name:'Maria Souza'},to_location:'Financeiro',created_by:{name:'Carlos Silva'},created_at:'2026-05-22T11:00:00',description:null},
+      {id:5,movement_type:'devolucao',asset_id:6,from_user:{name:'Rodrigo Santos'},from_location:'Comercial',to_user:null,to_location:'TI',created_by:{name:'Administrador TI'},created_at:'2026-05-20T15:30:00',description:'Colaborador desligado'},
+    ],
+  },
+};
+
+function demoApi(method, path) {
+  if (path.startsWith('/dashboard')) return DEMO_DATA.dashboard;
+  if (path.startsWith('/categories')) return DEMO_DATA.categories;
+  if (path.startsWith('/users')) return DEMO_DATA.users;
+  if (path.startsWith('/assets/') && path.includes('export')) return null;
+  if (path.startsWith('/assets')) return DEMO_DATA.assets;
+  if (path.startsWith('/movements')) return DEMO_DATA.movements;
+  if (path.startsWith('/auth/me')) return DEMO_DATA.user;
+  if (method !== 'GET') { toast('Modo demonstração — operação simulada', 'info'); return {}; }
+  return {};
+}
+
 /* ─── State ──────────────────────────────────────────────────── */
 const S = {
   token: localStorage.getItem('ti_token') || null,
@@ -37,6 +117,8 @@ const I = {
 const BASE = '/api/v1';
 
 async function api(method, path, body, isForm = false) {
+  if (DEMO_MODE) return demoApi(method, path);
+
   const headers = {};
   if (S.token) headers['Authorization'] = `Bearer ${S.token}`;
   if (body && !isForm) headers['Content-Type'] = 'application/json';
@@ -68,6 +150,14 @@ const upload = (p, f) => api('POST',   p, f, true);
 
 /* ─── Auth ──────────────────────────────────────────────────── */
 async function login(email, password) {
+  if (DEMO_MODE) {
+    S.token = 'demo-token';
+    S.user  = DEMO_DATA.user;
+    localStorage.setItem('ti_token', S.token);
+    localStorage.setItem('ti_user', JSON.stringify(S.user));
+    navigate('dashboard');
+    return;
+  }
   const form = new URLSearchParams({ username: email, password });
   const res  = await fetch(`${BASE}/auth/token`, {
     method:  'POST',
@@ -142,6 +232,7 @@ function renderSidebar() {
           </div>
         </div>
       </div>
+      ${DEMO_MODE ? `<div style="margin:0 12px 8px;padding:8px 12px;background:#F59E0B22;border:1px solid #F59E0B55;border-radius:8px;font-size:11.5px;color:#D97706;text-align:center;font-weight:600;letter-spacing:.3px">⚡ MODO DEMONSTRAÇÃO</div>` : ''}
       <nav class="sidebar-nav">
         <div class="nav-section-label">Menu</div>
         ${nav.map(n => `
@@ -184,6 +275,7 @@ function renderLogin() {
           <span class="login-logo-text">Inventário TI</span>
         </div>
         <p class="login-sub">Acesse sua conta para continuar</p>
+        ${DEMO_MODE ? `<div style="background:#6366F122;border:1px solid #6366F155;border-radius:8px;padding:10px 14px;font-size:12.5px;color:#6366F1;margin-bottom:4px;text-align:center">Modo demonstração — use qualquer e-mail e senha</div>` : ''}
         <div id="login-error" class="login-error"></div>
         <div class="form-group">
           <label>E-mail</label>
