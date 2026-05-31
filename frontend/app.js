@@ -188,13 +188,30 @@ function navigate(page, params = {}) {
   renderApp();
 }
 
+function toggleSidebar() {
+  document.body.classList.toggle('sidebar-open');
+}
+function closeSidebar() {
+  document.body.classList.remove('sidebar-open');
+}
+
 function renderApp() {
   if (!S.token) { renderLogin(); return; }
   const app = document.getElementById('app');
   app.innerHTML = `
+    <div class="sidebar-backdrop" onclick="closeSidebar()"></div>
     <div class="layout">
       ${renderSidebar()}
       <div class="main">
+        <div class="mobile-topbar">
+          <div class="mobile-logo">
+            <div class="logo-icon" style="width:28px;height:28px">${I.cpu}</div>
+            <span class="mobile-logo-text">Inventário TI</span>
+          </div>
+          <button class="btn-hamburger" onclick="toggleSidebar()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+        </div>
         <div id="page-content"></div>
       </div>
     </div>
@@ -257,7 +274,7 @@ function renderSidebar() {
 
 function bindNav() {
   document.querySelectorAll('[data-nav]').forEach(el => {
-    el.addEventListener('click', () => navigate(el.dataset.nav));
+    el.addEventListener('click', () => { closeSidebar(); navigate(el.dataset.nav); });
   });
 }
 

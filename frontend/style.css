@@ -778,6 +778,139 @@ label {
 .mb-16        { margin-bottom: 16px; }
 .truncate     { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
+/* ─── Mobile topbar ─────────────────────────────────────────── */
+.mobile-topbar {
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 20px;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  backdrop-filter: blur(16px);
+}
+.mobile-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mobile-logo-text {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-bright);
+}
+.btn-hamburger {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-s);
+  color: var(--text-muted);
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all 0.4s var(--ease);
+}
+.btn-hamburger:hover { border-color: var(--border-hover); color: var(--text); }
+.btn-hamburger svg { width: 18px; height: 18px; }
+
+/* ─── Sidebar overlay (mobile) ───────────────────────────── */
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  backdrop-filter: blur(4px);
+  z-index: 99;
+  animation: fade-in 0.3s var(--ease);
+}
+body.sidebar-open .sidebar-backdrop { display: block; }
+body.sidebar-open .sidebar { transform: translateX(0); }
+
+/* ─── Responsive: tablet ─────────────────────────────────── */
+@media (max-width: 900px) {
+  :root { --sidebar-w: 200px; }
+  .page { padding: 24px 20px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .grid-2 { grid-template-columns: 1fr; gap: 16px; }
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .form-row-3 { grid-template-columns: 1fr 1fr; }
+}
+
+/* ─── Responsive: mobile ─────────────────────────────────── */
+@media (max-width: 680px) {
+  /* Sidebar vira overlay */
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.5s var(--ease);
+    z-index: 100;
+    box-shadow: 24px 0 80px rgba(0,0,0,0.8);
+  }
+
+  /* Main ocupa tela inteira */
+  .main { margin-left: 0; }
+
+  /* Topbar mobile visível */
+  .mobile-topbar { display: flex; }
+
+  /* Página */
+  .page { padding: 20px 16px; }
+  .page-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .page-actions { width: 100%; flex-wrap: wrap; }
+  .page-title { font-size: 18px; }
+
+  /* Stats em 2 colunas compactas */
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .stat-card { padding: 16px; gap: 10px; }
+  .stat-value { font-size: 22px; }
+
+  /* Grids empilhados */
+  .grid-2 { grid-template-columns: 1fr; }
+  .grid-3 { grid-template-columns: 1fr; }
+
+  /* Forms */
+  .form-row   { grid-template-columns: 1fr; }
+  .form-row-3 { grid-template-columns: 1fr; }
+
+  /* Search bar */
+  .search-bar { flex-direction: column; align-items: stretch; }
+  .filter-select { width: 100%; min-width: unset; }
+
+  /* Tabelas */
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  tbody td { font-size: 12.5px; padding: 11px 12px; white-space: nowrap; }
+  thead th { padding: 8px 12px; font-size: 10px; white-space: nowrap; }
+
+  /* Modais */
+  .modal-overlay { align-items: flex-end; padding: 0; }
+  .modal {
+    max-width: 100%;
+    border-radius: var(--radius-l) var(--radius-l) 0 0;
+    max-height: 92vh;
+    animation: slide-up-mobile 0.5s var(--ease);
+  }
+
+  /* Categorias */
+  .category-grid { grid-template-columns: 1fr; }
+
+  /* Toast */
+  #toast-container { left: 16px; right: 16px; bottom: 16px; }
+  .toast { min-width: unset; max-width: 100%; }
+
+  /* Paginação */
+  .pagination { flex-direction: column; gap: 10px; align-items: center; }
+
+  /* Login */
+  .login-card { padding: 32px 24px; }
+}
+
+/* ─── Responsive: muito pequeno ──────────────────────────── */
+@media (max-width: 380px) {
+  .stats-grid { grid-template-columns: 1fr; }
+  .stat-value { font-size: 20px; }
+}
+
 /* ─── Keyframes ─────────────────────────────────────────────── */
 @keyframes fade-in {
   from { opacity: 0; }
@@ -786,6 +919,10 @@ label {
 @keyframes slide-up {
   from { transform: translateY(24px); opacity: 0; }
   to   { transform: translateY(0);    opacity: 1; }
+}
+@keyframes slide-up-mobile {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
 }
 @keyframes slide-in-right {
   from { transform: translateX(24px); opacity: 0; }
