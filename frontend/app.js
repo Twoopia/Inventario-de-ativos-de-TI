@@ -339,6 +339,7 @@ function renderDashboardData(d) {
   const maxCat = Math.max(...d.assets_by_category.map(c => c.count), 1);
 
   document.getElementById('dash-content').innerHTML = `
+
     <div class="stats-grid">
       ${statCard('Total de Ativos', d.total_assets, 'var(--primary-light)', 'var(--primary)', I.box, `Valor total: ${currency(d.total_value)}`)}
       ${statCard('Ativos em Uso', d.active_assets, 'var(--success-bg)', 'var(--success)', I.check)}
@@ -425,11 +426,12 @@ function renderDashboardData(d) {
       </div>
     </div>
   `;
+  observeAnimations();
 }
 
 function statCard(label, value, bgColor, iconColor, icon, sub = '') {
   return `
-    <div class="stat-card">
+    <div class="stat-card animate">
       <div class="stat-icon" style="background:${bgColor};color:${iconColor}">${icon}</div>
       <div class="stat-body">
         <div class="stat-value">${value}</div>
@@ -1071,6 +1073,24 @@ function formatDate(iso) {
 }
 
 function esc(str) { return (str || '').replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
+
+/* ─── Intersection Observer (stagger 80ms) ──────────────── */
+function observeAnimations() {
+  const els = document.querySelectorAll('.animate');
+  if (!els.length) return;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05 });
+  els.forEach((el, i) => {
+    el.style.transitionDelay = `${i * 80}ms`;
+    io.observe(el);
+  });
+}
 
 async function exportFile(path, filename) {
   try {
